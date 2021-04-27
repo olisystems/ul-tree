@@ -1,5 +1,14 @@
 const data = {
-  Parent: "Child",
+  Parent: {
+    Child1: "Child 1",
+    Child2: {Child21: "Child 21", Child22: "Child 22"},
+    Child3: [
+      "Child 31",
+      "Child 32",
+      { Child33: "Sub Child" },
+      { Child4: ["Child 41", "Child 42", { Child43: "Sub Child" }] },
+    ],
+  },
 };
 
 // array to hold HTML tags
@@ -15,7 +24,9 @@ const createList = (items) => {
       markupArray.push(`<li> <span> ${items} </span> </li>`);
       break;
     case "array":
-      console.log(items);
+      items.forEach((item) => {
+        createList(item);
+      });
       break;
   }
 };
