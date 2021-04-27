@@ -1,4 +1,4 @@
-# Nested UL - Tree View | Part 1
+# Nested UL - Tree View
 
 ## Nested UI from JSON data and Tree view with pure CSS3
 
