@@ -1,8 +1,8 @@
 const data = {
   Parent: {
+    img: "father.png",
     name: "Jan Doe",
     age: "50",
-    img: "father.png",
   },
 };
 
@@ -25,6 +25,7 @@ const getItems = (items) => {
     // fetch the parent object
     let details = items[item];
     getDetails(details);
+    // push the closing tag for parent
     markupArray.push("</li>");
   }
 };
@@ -34,7 +35,14 @@ const getDetails = (details) => {
   // iterate over the detail items of object
   for (const detail in details) {
     // fetch the value of each item
-    markupArray.push(`<span> ${details[detail]} </span>`);
+
+    if (detail == "img") {
+      markupArray.push(
+        `<img src="./img/${details[detail]}" alt="${details[detail]}">`
+      );
+    } else {
+      markupArray.push(`<span> ${details[detail]} </span>`);
+    }
   }
 };
 
