@@ -157,20 +157,20 @@ const data = {
 
 ### 1.1 Creating Family Tree
 
-At this point, we have successfully created the tree view from the nested JSON data. However, according to the original idea of the project, we want to plot a family tree structer wher each member of the family has some bunch of details and a picture as well.
+At this point, we have successfully created the tree view from the nested JSON data. However, according to the original idea of the project, we want to plot a family tree structure where each member of the family has some bunch of details and a picture as well.
 
 ```js
 // add a parent with some details
 const data = {
   Parent: {
+    img: "father.png",
     name: "Jan Doe",
     age: "50",
-    img: "father.png",
   },
 };
 ```
 
-To adopt the structure as shown in the picture above, let's clean up stuff and start from the beginning. Again, starting with expression evaluation function `createList`, as our data is `object`, we will pass it to the `getItems` function.
+To adopt the structure as shown in the picture above, let's clean up stuff and start from the beginning. Again, starting with the expression evaluation function `createList`, as our data is `object`, we will pass it to the `getItems` function.
 
 ```js
 // evaluate expressions
@@ -183,7 +183,7 @@ const createList = (items) => {
 };
 ```
 
-If we look at our new data structure, we see that we have two objects: one `data` object and inside that ther is `Parent` object. The process will go through in following steps:
+If we look at our new data structure, we see that we have two objects: one `data` object and inside that there is a `Parent` object. The process will go through in following steps:
 
 1. For the first, `data` object, we want to push it as a `li` item of root `ul`.
 
@@ -197,7 +197,7 @@ const getItems = (items) => {
 };
 ```
 
-2. For the `Parent` object, we will iterate over the details of `Parent` object. Lets create another `getDetails` function. Inside this function we will loop over the object items, fetch the item value and push a `span` tag for each item.
+2. For the `Parent` object, we will iterate over the details of `Parent` object. Let's create another `getDetails` function. Inside this function, we will loop over the object items, fetch the item value and push a `span` tag for each item.
 
 ```js
 // get details
@@ -225,3 +225,24 @@ const getItems = (items) => {
   }
 };
 ```
+
+Before moving on, let's tweak one change for image. Righ now, we just the image name but we want to place an iamge there. For this, we will place a `if - else` statement to check if the `detail` is an `img` and put the `img` tag instead of `span` element. Also, in the `data` object, we can move `imge` item to the top of other items, and set style for `span` and `img` element as `display:block`.
+
+```js
+// get details
+const getDetails = (details) => {
+  // iterate over the detail items of object
+  for (const detail in details) {
+    // fetch the value of each item
+
+    if (detail == "img") {
+      markupArray.push(
+        `<img src="./img/${details[detail]}" alt="${details[detail]}">`
+      );
+    } else {
+      markupArray.push(`<span> ${details[detail]} </span>`);
+    }
+  }
+};
+```
+Now, we have to deal with the children and for this lets add an array of children to the `Parent` element.
