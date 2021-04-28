@@ -1,4 +1,4 @@
-# Nested UL - Tree View | Part 2
+# Nested UL - Tree View | Part 3
 
 ## Nested UI from JSON data and Tree view with pure CSS3
 
@@ -90,7 +90,7 @@ const createList = (items) => {
 };
 ```
 
-Next, we will create the main function to call the `createList` function and add a closing `</ul>` tag to the `markupArray`. Inside the main function, we will make use of the regular [Array.join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) function which will convert an array to a string. Let's create a div element `<div id="list"></div>` and set the contents to the concatenated string using the jQuery [html](https://api.jquery.com/html/) method.
+Next, we will create a main function to call the `createList` function and add a closing `</ul>` tag to the `markupArray`. Inside the main function, we will make use of the regular [Array.join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) function which will convert an array to a string. Let's create a div element `<div id="list"></div>` and set the contents to the concatenated string using the jQuery [html](https://api.jquery.com/html/) method.
 
 ```js
 // call the function on page load
@@ -137,14 +137,14 @@ In the case of an array, we will iterate over the items of the array to further 
 
 ```js
 const data = {
-  Parent: ["Child 1", "Child 2", {Child3:'Sub Child'}],
+  Parent: ["Child 1", "Child 2", { Child3: "Sub Child" }],
 };
 
 // OR
 const data = {
   Parent: {
     Child1: "Child 1",
-    Child2: {Child21: "Child 21", Child22: "Child 22"},
+    Child2: { Child21: "Child 21", Child22: "Child 22" },
     Child3: [
       "Child 31",
       "Child 32",
@@ -154,3 +154,58 @@ const data = {
   },
 };
 ```
+
+### 1.1 Creating Family Tree
+
+At this point, we have successfully created the tree view from the nested JSON data. However, according to the original idea of the project, we want to plot a family tree structer wher each member of the family has some bunch of details and a picture as well.
+
+```js
+// add a parent with some details
+const data = {
+  Parent: {
+    name: "Jan Doe",
+    age: "50",
+    img: "father.png",
+  },
+};
+```
+
+To adopt the structure as shown in the picture above, let's clean up stuff and start from the beginning. Again, starting with expression evaluation function `createList`, as our data is `object`, we will pass it to the `getItems` function.
+
+```js
+// evaluate expressions
+const createList = (items) => {
+  switch ($.type(items)) {
+    case "object":
+      getItems(items);
+      break;
+  }
+};
+```
+
+If we look at our new data structure, we see that we have two objects: one `data` object and inside that ther is `Parent` object. The process will go through in following steps:
+
+1. For the first, `data` object, we want to push it as a `li` item of root `ul`.
+
+```js
+// get items in the object
+const getItems = (items) => {
+  for (const item in items) {
+    markupArray.push(`<li> ${item}`);
+    markupArray.push("</li>");
+  }
+};
+```
+
+2. For the `Parent` object, we will iterate over the details of `Parent` object. Lets create another `getDetails` function. Inside this function we will loop over the object items, fetch the item value and push a `span` tag for each item.
+
+```js
+// get details
+const getDetails = (details) => {
+  for (const detail in details) {
+    markupArray.push(`<span> ${details[detail]} </span>`);
+  }
+};
+```
+
+We will fetch details of the `Parent` object and call the `getDetails` function inside the iteration of `getItems` function. Its important to note that here (`details[detail]`) we are trying to get the values of the items. In this way, first we find the object in our data and iterate over the object to get its details.
