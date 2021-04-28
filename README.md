@@ -226,7 +226,7 @@ const getItems = (items) => {
 };
 ```
 
-Before moving on, let's tweak one change for image. Righ now, we just the image name but we want to place an iamge there. For this, we will place a `if - else` statement to check if the `detail` is an `img` and put the `img` tag instead of `span` element. Also, in the `data` object, we can move `imge` item to the top of other items, and set style for `span` and `img` element as `display:block`.
+Before moving on, let's tweak one change for the image. Right now, we just the image name but we want to place an iamge there. For this, we will place a `if - else` statement to check if the `detail` is an `img` and put the `img` tag instead of `span` element. Also, in the `data` object, we can move `imge` item to the top of other items, and set style for `span` and `img` element as `display:block`.
 
 ```js
 // get details
@@ -245,4 +245,54 @@ const getDetails = (details) => {
   }
 };
 ```
-Now, we have to deal with the children and for this lets add an array of children to the `Parent` element.
+
+Now, we have to deal with the children and for this lets add an array of children to the `Parent` element. It's important to that child should adopt the same structure as of the parent i.e. some details and an array of children.
+
+```js
+const data = {
+  Parent: {
+    img: "father.png",
+    name: "Jan Doe",
+    age: "50",
+    children: [
+      {
+        child: {
+          img: "child_1.png",
+          name: "child 1",
+          age: "25",
+        },
+      },
+    ],
+  },
+};
+```
+
+Now we have three cases to evaluate: if the key of the item inside the object is `img`, `children` or something elese. We already have approaches to deal with the `img` and other stuff, so now we will proceed with the `children` array. In essential, we need to create an `ul` that will contain all the items in the array as `li`. In this particular case:
+
+1. first we will push an `<ul>` tag as this will be a nested list inside the parent `li`.
+2. Then, loop through the items of array and pass each item to the `getItems` function. This function will push `<li>` tag and then call `getDetails` function (as items inside the array are objects) for each item. Thus, repeating the same process we did for parent element.
+3. At the end of the loop, we push the closing tage `</ul>` to the `markupArray`.
+
+```js
+// get details
+const getDetails = (details) => {
+  // iterate over the detail items of object
+  for (const detail in details) {
+    // fetch the value of each item
+    if (detail == "img") {
+      markupArray.push(
+        `<img src="./img/${details[detail]}" alt="${details[detail]}">`
+      );
+    } else if (detail == "children") {
+      markupArray.push("<ul>");
+      details[detail].forEach((element) => {
+        getItems(element);
+      });
+
+      markupArray.push("</ul>");
+    } else {
+      markupArray.push(`<span> ${details[detail]} </span>`);
+    }
+  }
+};
+```
