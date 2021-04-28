@@ -202,10 +202,26 @@ const getItems = (items) => {
 ```js
 // get details
 const getDetails = (details) => {
+  // iterate over the detail items of object
   for (const detail in details) {
+    // fetch the value of each item
     markupArray.push(`<span> ${details[detail]} </span>`);
   }
 };
 ```
 
-We will fetch details of the `Parent` object and call the `getDetails` function inside the iteration of `getItems` function. Its important to note that here (`details[detail]`) we are trying to get the values of the items. In this way, first we find the object in our data and iterate over the object to get its details.
+We will fetch details of the `Parent` object and call the `getDetails` function inside the iteration of `getItems` function. Its important to note that here (`details[detail]`) we are trying to get the values of the items. In this way, first we find the object in our data and iterate over the object to get its details. The modified `getItems` function:
+
+```js
+// get items in the object
+const getItems = (items) => {
+  for (const item in items) {
+    markupArray.push(`<li> ${item}`);
+    // fetch the parent object
+    let details = items[item];
+    getDetails(details);
+    // push the closing tag for parent
+    markupArray.push("</li>");
+  }
+};
+```
