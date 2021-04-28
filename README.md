@@ -246,7 +246,7 @@ const getDetails = (details) => {
 };
 ```
 
-Now, we have to deal with the children and for this lets add an array of children to the `Parent` element. It's important to that child should adopt the same structure as of the parent i.e. some details and an array of children.
+Next, we have to deal with the children and for this let's add an array of children to the `Parent` element. It's important that the child should adopt the same structure as the parent i.e. some details and an array of children.
 
 ```js
 const data = {
@@ -267,11 +267,11 @@ const data = {
 };
 ```
 
-Now we have three cases to evaluate: if the key of the item inside the object is `img`, `children` or something elese. We already have approaches to deal with the `img` and other stuff, so now we will proceed with the `children` array. In essential, we need to create an `ul` that will contain all the items in the array as `li`. In this particular case:
+Now we have three cases to evaluate: if the key of the item inside the object is `img`, `children` or something else. We already have approaches to deal with the `img` and other stuff, so now we will proceed with the `children` array. In essential, we need to create an `ul` that will contain all the items in the array as `li`. In this particular case:
 
-1. first we will push an `<ul>` tag as this will be a nested list inside the parent `li`.
-2. Then, loop through the items of array and pass each item to the `getItems` function. This function will push `<li>` tag and then call `getDetails` function (as items inside the array are objects) for each item. Thus, repeating the same process we did for parent element.
-3. At the end of the loop, we push the closing tage `</ul>` to the `markupArray`.
+1. first, we will push a `<ul>` tag as this will be a nested list inside the parent `li`.
+2. Then, loop through the items of the array and pass each item to the `getItems` function. This function will push a `<li>` tag and then call `getDetails` function (as items inside the array are objects) for each item. Thus, repeating the same process we did for the parent element.
+3. At the end of the loop, we push the closing tag `</ul>` to the `markupArray`.
 
 ```js
 // get details
