@@ -1,12 +1,73 @@
 const data = {
   Parent: {
-    Child1: "Child 1",
-    Child2: {Child21: "Child 21", Child22: "Child 22"},
-    Child3: [
-      "Child 31",
-      "Child 32",
-      { Child33: "Sub Child" },
-      { Child4: ["Child 41", "Child 42", { Child43: "Sub Child" }] },
+    img: "father.png",
+    name: "Jan Doe",
+    age: "50",
+    children: [
+      {
+        child: {
+          img: "child_1.png",
+          name: "child 1",
+          age: "25",
+        },
+      },
+      {
+        child: {
+          img: "child_2.png",
+          name: "child 2",
+          age: "22",
+          children: [
+            {
+              grandChild: {
+                img: "child_3.png",
+                name: "grand child 1",
+                age: "12",
+              },
+            },
+          ],
+        },
+      },
+      {
+        child: {
+          img: "child_4.png",
+          name: "child 3",
+          age: "16",
+          children: [
+            {
+              grandChild: {
+                img: "child_5.png",
+                name: "grand child 1",
+                age: "18",
+                children: [
+                  {
+                    grandgrandChild: {
+                      img: "child_6.png",
+                      name: "grand grand child 1",
+                      age: "13",
+                    },
+                  },
+                  {
+                    grandgrandChild: {
+                      img: "child_7.png",
+                      name: "grand grand child 1",
+                      age: "10",
+                      children: [
+                        {
+                          grandgrandChild: {
+                            img: "child_8.png",
+                            name: "grand grand grand child 1",
+                            age: "08",
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
     ],
   },
 };
@@ -20,27 +81,40 @@ const createList = (items) => {
     case "object":
       getItems(items);
       break;
-    case "string":
-      markupArray.push(`<li> <span> ${items} </span> </li>`);
-      break;
-    case "array":
-      items.forEach((item) => {
-        createList(item);
-      });
-      break;
   }
 };
 
 // get items in the object
 const getItems = (items) => {
   for (const item in items) {
-    // push li tags for parent
-    // with nested opening ul tag for children
-    markupArray.push(`<li> <a> ${item} </a> <ul>`);
-    // evaluate expression for children
-    createList(items[item]);
-    // push closing tage
-    markupArray.push("</ul></li>");
+    markupArray.push(`<li> ${item}`);
+    // fetch the parent object
+    let details = items[item];
+    getDetails(details);
+    // push the closing tag for parent
+    markupArray.push("</li>");
+  }
+};
+
+// get details
+const getDetails = (details) => {
+  // iterate over the detail items of object
+  for (const detail in details) {
+    // fetch the value of each item
+    if (detail == "img") {
+      markupArray.push(
+        `<img src="./img/${details[detail]}" alt="${details[detail]}">`
+      );
+    } else if (detail == "children") {
+      markupArray.push("<ul>");
+      details[detail].forEach((element) => {
+        getItems(element);
+      });
+
+      markupArray.push("</ul>");
+    } else {
+      markupArray.push(`<span> ${details[detail]} </span>`);
+    }
   }
 };
 

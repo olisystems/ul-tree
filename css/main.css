@@ -1,0 +1,8 @@
+#list span, img {
+  display: block;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+}
