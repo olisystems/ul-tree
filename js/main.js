@@ -1,13 +1,8 @@
 const data = {
   Parent: {
-    Child1: "Child 1",
-    Child2: {Child21: "Child 21", Child22: "Child 22"},
-    Child3: [
-      "Child 31",
-      "Child 32",
-      { Child33: "Sub Child" },
-      { Child4: ["Child 41", "Child 42", { Child43: "Sub Child" }] },
-    ],
+    name: "Jan Doe",
+    age: "50",
+    img: "father.png",
   },
 };
 
@@ -20,27 +15,26 @@ const createList = (items) => {
     case "object":
       getItems(items);
       break;
-    case "string":
-      markupArray.push(`<li> <span> ${items} </span> </li>`);
-      break;
-    case "array":
-      items.forEach((item) => {
-        createList(item);
-      });
-      break;
   }
 };
 
 // get items in the object
 const getItems = (items) => {
   for (const item in items) {
-    // push li tags for parent
-    // with nested opening ul tag for children
-    markupArray.push(`<li> <a> ${item} </a> <ul>`);
-    // evaluate expression for children
-    createList(items[item]);
-    // push closing tage
-    markupArray.push("</ul></li>");
+    markupArray.push(`<li> ${item}`);
+    // fetch the parent object
+    let details = items[item];
+    getDetails(details);
+    markupArray.push("</li>");
+  }
+};
+
+// get details
+const getDetails = (details) => {
+  // iterate over the detail items of object
+  for (const detail in details) {
+    // fetch the value of each item
+    markupArray.push(`<span> ${details[detail]} </span>`);
   }
 };
 
@@ -48,5 +42,6 @@ const getItems = (items) => {
 window.onload = () => {
   createList(data);
   markupArray.push("</ul>");
+  console.log(markupArray);
   $("#list").html(markupArray.join(""));
 };
