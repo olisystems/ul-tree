@@ -1,8 +1,16 @@
-#list span, img {
-  display: block;
-}
-
 img {
   width: 50px;
   height: 50px;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
