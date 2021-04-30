@@ -51,15 +51,6 @@ const data = {
                       img: "child_7.png",
                       name: "grand grand child 1",
                       age: "10",
-                      children: [
-                        {
-                          grandgrandChild: {
-                            img: "child_8.png",
-                            name: "grand grand grand child 1",
-                            age: "08",
-                          },
-                        },
-                      ],
                     },
                   },
                 ],
