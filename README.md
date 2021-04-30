@@ -296,3 +296,22 @@ const getDetails = (details) => {
   }
 };
 ```
+
+### 2. Plotting Vertical Tree View
+
+The process of plotting vertical tree view can be broadly divided into the following steps:
+Flip the horizontal view to vertical view
+Draw connectors between the elements
+
+#### 2.1 Flip List to Vertical View
+
+This is a fairly easy part and can be easily achieved using CSS [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) layout. In this case, we will set:
+
+- `ul` elements to vertical direction
+- `li` elements to horizonal direction
+
+The images are quite big, so the image width and height is set to 50px.
+
+From the data structure, we know that `ul` is the parent element and `li` is the child element. To use the flexbox layout, we need to make the parent element as flex container. The elements inside the flex container will become the flex items. By default, the `li` are block elements and are vertically stacked. Flexbox layout will align the flex items in a row in case direction is not specified. It is important to note that flexbox only applies to the items of the flex container, not to the nested items of flex items. However, for the current case the nested items are again `ul` so flexbox layout will be applied to them as well. As a result, we will have rows for all the `ul` and nested `ul` as well. Additionally, we will remove the default indentation and list style as well.
+
+As a result, we will see a vertical view of `ul` with the `li` in the horizontal direction (image 2 in the following screenshot). To change the direction of `li`, we will apply flexbox model to it and set the flexbox direction as `column` (image 3). With these two simple styles, we have fliped the view to the horizontal tree view.
