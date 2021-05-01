@@ -78,7 +78,7 @@ const createList = (items) => {
 // get items in the object
 const getItems = (items) => {
   for (const item in items) {
-    markupArray.push(`<li> <div><span>${item}</span>`);
+    markupArray.push(`<li> ${item}`);
     // fetch the parent object
     let details = items[item];
     getDetails(details);
@@ -97,7 +97,7 @@ const getDetails = (details) => {
         `<img src="./img/${details[detail]}" alt="${details[detail]}">`
       );
     } else if (detail == "children") {
-      markupArray.push("</div><ul>");
+      markupArray.push("<ul>");
       details[detail].forEach((element) => {
         getItems(element);
       });
