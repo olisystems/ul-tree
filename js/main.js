@@ -42,14 +42,14 @@ const data = {
                   {
                     grandgrandChild: {
                       img: "child_6.png",
-                      name: "grand grand child 1",
+                      name: "great grand child 1",
                       age: "13",
                     },
                   },
                   {
                     grandgrandChild: {
                       img: "child_7.png",
-                      name: "grand grand child 1",
+                      name: "great grand child 2",
                       age: "10",
                     },
                   },
