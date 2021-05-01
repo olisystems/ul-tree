@@ -94,7 +94,7 @@ const getDetails = (details) => {
     // fetch the value of each item
     if (detail == "img") {
       markupArray.push(
-        `<span><img src="./img/${details[detail]}" alt="${details[detail]}"> </span>`
+        `<img src="./img/${details[detail]}" alt="${details[detail]}">`
       );
     } else if (detail == "children") {
       markupArray.push("</div><ul>");
