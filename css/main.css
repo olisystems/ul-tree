@@ -5,12 +5,28 @@ img {
 
 ul {
   padding: 0;
-  list-style: none;
   display: flex;
+  list-style: none;
+  padding-top: 2.5vh;
+  position: relative;
+  justify-content: center;
 }
 
 li {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+ul::before {
+  content: "";
+  position: absolute;
+  top: 0vh;
+  left: 50%;
+  border: solid 1px;
+  height: 2.5vh;
+}
+
+ul:first-child::before {
+  display: none;
 }
