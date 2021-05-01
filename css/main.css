@@ -1,8 +1,80 @@
-#list span, img {
-  display: block;
-}
-
 img {
   width: 50px;
   height: 50px;
+}
+
+ul {
+  padding: 0;
+  display: flex;
+  list-style: none;
+  padding-top: 2.5vh;
+  position: relative;
+  justify-content: center;
+}
+
+li {
+  display: flex;
+  padding-top: 2.5vh;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* draw connectors between parent elements */
+ul::before {
+  content: "";
+  position: absolute;
+  top: 0vh;
+  left: 50%;
+  border: solid 1px;
+  height: 2.5vh;
+}
+
+ul:first-child::before {
+  display: none;
+}
+
+/* draw connectors between siblings */
+/* vertical connectors */
+li::before {
+  content: "";
+  top: 0;
+  left: 50%;
+  height: 2.5vh;
+  position: absolute;
+  border: solid 1px;
+}
+
+/* horizontal connectors */
+li::after {
+  content: "";
+  top: 0;
+  width: 100%;
+  position: absolute;
+  border-top: solid 1px;
+}
+
+/* remove the horizontal connector for the only child */
+li:only-child::after {
+  display: none;
+}
+
+/* remove extra left and right horizontal connector */
+li:first-of-type::after {
+  width: 50%;
+  right: 0;
+}
+
+li:last-of-type::after {
+  width: 50%;
+  left: 0;
+}
+
+/* remove connectors before only child */
+li:only-child {
+  padding-top: 0;
+}
+
+li:only-child::before {
+  display: none;
 }
