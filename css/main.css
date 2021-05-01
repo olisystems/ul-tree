@@ -14,10 +14,13 @@ ul {
 
 li {
   display: flex;
-  flex-direction: column;
+  padding-top: 2.5vh;
+  position: relative;
   align-items: center;
+  flex-direction: column;
 }
 
+/* draw connectors between parent elements */
 ul::before {
   content: "";
   position: absolute;
@@ -28,5 +31,50 @@ ul::before {
 }
 
 ul:first-child::before {
+  display: none;
+}
+
+/* draw connectors between siblings */
+/* vertical connectors */
+li::before {
+  content: "";
+  top: 0;
+  left: 50%;
+  height: 2.5vh;
+  position: absolute;
+  border: solid 1px;
+}
+
+/* horizontal connectors */
+li::after {
+  content: "";
+  top: 0;
+  width: 100%;
+  position: absolute;
+  border-top: solid 1px;
+}
+
+/* remove the horizontal connector for the only child */
+li:only-child::after {
+  display: none;
+}
+
+/* remove extra left and right horizontal connector */
+li:first-of-type::after {
+  width: 50%;
+  right: 0;
+}
+
+li:last-of-type::after {
+  width: 50%;
+  left: 0;
+}
+
+/* remove connectors before only child */
+li:only-child {
+  padding-top: 0;
+}
+
+li:only-child::before {
   display: none;
 }
