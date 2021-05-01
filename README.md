@@ -317,3 +317,23 @@ From the data structure, we know that `ul` is the parent element and `li` is the
 As a result, we will see a vertical view of `ul` with the `li` in the horizontal direction (image 2 in the following screenshot). To change the direction of `li`, we will apply the flexbox model to it and set the flexbox direction as `column` (image 3). With these two simple styles, we have flipped the view to the horizontal tree view.
 
 ![TreeView1](./img/part-2_1.png)
+
+#### 2.2 Draw Connectors
+
+In this section, we will draw connectors:
+
+- between the parent and siblings
+- between the siblings and [sub]siblings
+
+To achieve this, we will make use of [Pseudo-classes and pseudo-elements](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements). To place the connectors horizonally in the middle and verticaly on the top of the element, we will using `left:50%` and `top:0` position specifiers respectively.
+
+- Let's start with adding vertical connectors before each parent element(`ul`), except the very first parent element. This will be done using the `::before` pseudo class relative to the `ul`, along with adding a `padding-top` to the `ul` equal to the height of the pseudo element. To hide the connector before the very first element of `ul`, we will use pseudo class `:first-child` to set the display of pesudo element `::before` to `none`. The result of this can be seen in image 1 of the below screenshot.
+
+- Adding connectors between the siblings will be done in two steps. First, we will add vertical connectors before each `li` element using `::before` psudo element relative to the parent `li`. In the next step, we will place horizontal connectors for the siblings using the `::after` pseudo element with `width` and `border-top` properties. The resultant image is shown as image 2 in the screenshot below.
+
+![TreeView2](./img/part-2_2.png)
+
+- It can be seen from the above screenshot that we need to fix some issues: 
+  * First, remove horizontal connector from the very first element.  This issue can be fixed with the use of `only-child` pseudo class to hide the display of pseudo element in case there is only one child.
+  * Next, remove the left and right connectors for the first and last element of a group respectively. This will be fixed using `first-of-type` and `last-of-type` pseudo classes with a width of `50%` and position right and left 0 respectively.
+  * Finally, remove the `::before` connects for the single element in the group using `padding-top:0` and `display:none`.
