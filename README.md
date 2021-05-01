@@ -333,7 +333,15 @@ To achieve this, we will make use of [Pseudo-classes and pseudo-elements](https:
 
 ![TreeView2](./img/part-2_2.png)
 
-- It can be seen from the above screenshot that we need to fix some issues: 
-  * First, remove the horizontal connector from the very first element.  This issue can be fixed with the use of `only-child` pseudo-class to hide the display of pseudo-elements in case there is only one child.
-  * Next, remove the left and right connectors for the first and last element of a group respectively. This will be fixed using `first-of-type` and `last-of-type` pseudo-classes with a width of `50%` and position right and left 0 respectively.
-  * Finally, remove the `::before` connects for the single element in the group using `padding-top:0` and `display:none`.
+- It can be seen from the above screenshot that we need to fix some issues:
+  - First, remove the horizontal connector from the very first element. This issue can be fixed with the use of `only-child` pseudo-class to hide the display of pseudo-elements in case there is only one child.
+  - Next, remove the left and right connectors for the first and last element of a group respectively. This will be fixed using `first-of-type` and `last-of-type` pseudo-classes with a width of `50%` and position right and left 0 respectively.
+  - Finally, remove the `::before` connects for the single element in the group using `padding-top:0` and `display:none`.
+
+#### 2.4 Formatting Elements
+
+To add some styles, we will wrap details `span` elements into a single `div` element. The following git diff screentshot shows what has been changed.
+
+![TreeView2](./img/part-2_3.png)
+
+We will add some padding between the children, background color and text transformation.
