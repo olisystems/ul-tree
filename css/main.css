@@ -1,6 +1,19 @@
-img {
-  width: 50px;
-  height: 50px;
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  color: #333;
+  box-sizing: border-box;
+  background-color: #f3f3f3;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ul {
@@ -14,10 +27,10 @@ ul {
 
 li {
   display: flex;
-  padding-top: 2.5vh;
   position: relative;
   align-items: center;
   flex-direction: column;
+  padding-top: 2.5vh;
 }
 
 /* draw connectors between parent elements */
@@ -77,4 +90,48 @@ li:only-child {
 
 li:only-child::before {
   display: none;
+}
+
+/* adding styles */
+li div * {
+  padding: 0.3em;
+}
+
+li div {
+  padding: 0.5em;
+  margin: 0 1em;
+  border-radius: 2px;
+  text-align: center;
+  transition: all 0.3s ease-out;
+  background: rgb(223, 211, 211);
+  box-shadow: 2px 20px 50px 0 rgb(0 0 0 / 7%);
+}
+
+li div img {
+  width: 65px;
+  height: 65px;
+}
+
+span {
+  display: block;
+}
+
+li div span:nth-child(3) {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* hover effect*/
+li div:hover,
+li div:hover + ul li div {
+  background: rgb(206, 188, 188);
+  transform: scale(1.02) translateY(-0.2rem);
+}
+
+li div:hover + ul li::after,
+li div:hover + ul li::before,
+li div:hover + ul::before,
+li div:hover + ul ul::before {
+  border-color: rgb(206, 188, 188);
+  transform: scale(1) translateY(-0.3rem);
 }
